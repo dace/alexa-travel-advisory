@@ -1,0 +1,25 @@
+{
+  "name": "alexa-passport",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm run clean && npm run copyModules && npm run bundle",
+    "bundle": "babel ./src --out-dir=./public/src && babel ./index.js --out-dir=./public",
+    "clean": "rm -rf ./public/*",
+    "copyModules": "cp -r ./node_modules ./public/node_modules",
+    "test": "npm run build && jest"
+  },
+  "author": "Dace Willmott <dacewillmott@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "alexa-app": "^3.2.0",
+    "alexa-sdk": "^1.0.7",
+    "babel-cli": "^6.23.0",
+    "babel-plugin-transform-flow-strip-types": "^6.22.0",
+    "jest-cli": "^19.0.2",
+    "node-fetch": "^1.6.3",
+    "xml2json": "^0.11.0"
+  },
+  "repository": "git@github.com:hidace/alexa-congress.git"
+}
