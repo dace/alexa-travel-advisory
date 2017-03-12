@@ -1,10 +1,15 @@
-# Safe Travels
+# Passport
 
 ![Amazon Alexa logo](./docs/amazon_alexa_logo.jpg)
 
 # Questions you can ask
 
 This skill allows for the following questions:
+
+- Is it safe to visit [country] / Are there any warnings or alerts for [country]?
+- How many travel alerts / warnings are there?
+- List of travel warnings
+- List of travel alerts
 
 
 # Testing
