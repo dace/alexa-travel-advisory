@@ -34,4 +34,19 @@ app.launch(function(request, response) {
 //     });
 //   });
 
+const requestUrl = 'https://travel.state.gov/_res/rss/TWs.xml';
+
+const sendRequest = (requestUrl, callback) => {
+  fetch(requestUrl)
+    .then(res => res.text())
+    .then(data => JSON.parse(parser.toJson(data)))
+    .then(dataObj => {
+      const advisoryDescription = dataObj.rss.channel.description;
+      const advisories = dataObj.rss.channel.item;
+      callback;
+    })
+    .catch(err => {
+      response.say('Sorry, but there appears to have been the following error when trying to process your request:', err);
+    });
+}
 exports.handler = app.lambda();
