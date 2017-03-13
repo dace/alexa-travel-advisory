@@ -30,7 +30,7 @@ app.intent('GetCountryStatus', {
       if (err) {
         throw err;
       }
-      const { description } = result.rss.channel[0];
+      const description = result.rss.channel[0].description;
       const advisories = result.rss.channel[0].item;
 
       const countryStatus = {
@@ -46,7 +46,7 @@ app.intent('GetCountryStatus', {
         if (country === setPhrase) {
           countryStatus.country = country;
           countryStatus.issuedAt = item.pubDate[0];
-          countryStatus.advisory = item.description[0];
+          countryStatus.advisory = item.description[0].replace(/\\n/g, ' ').replace(/\<.*?\>\s?/g, ' ').replace(/\&.*?\;\s?/g, ' ');
         }
       });
 
