@@ -1,41 +1,18 @@
 // @flow
+
 'use strict';
 
 const alexa = require('alexa-app');
 const fetch = require('node-fetch');
-const parser = require('xml2json');
+const parseString = require('xml2js').parseString;
 
 const app = new alexa.app('passport');
 
-app.launch(function(request, response) {
+app.launch((request, response) => {
   response.say('Welcome to Passport, where you can get info on current travel warnings and alerts issued by the U.S. State Department. Please, ask away...');
-  // fetch('https://travel.state.gov/_res/rss/TWs.xml')
-  //   .then(res => res.text())
-  //   .then(data => JSON.parse(parser.toJson(data)))
-  //   .then(dataObj => {
-  //     const advisoryCount = dataObj.rss.channel.item.length;
-  //     response.say(`There are currently ${advisoryCount} Travel Alerts.`);
-  //   })
-  //   .catch(err => {
-  //     response.say('Sorry, but there appears to have been the following error when trying to process your request:', err);
-  //   });
 });
 
-// fetch('https://travel.state.gov/_res/rss/TAs.xml')
-//   .then(res => res.text())
-//   .then(data => JSON.parse(parser.toJson(data)))
-//   .then(dataObj => {
-//     const description = dataObj.rss.channel.description;
-//     const alerts = dataObj.rss.channel.item;
-//     console.log(`There are currently ${alerts.length} Travel Alerts.`);
-//     alerts.forEach(function(item, index) {
-//       console.log(`Travel alert ${index + 1} relates to ${item.title.replace(/ Travel Alert */g, "")}. It was issued on ${item.pubDate}.`);
-//       // console.log(item.description);
-//     });
-//   });
-
 const warningsURL = 'https://travel.state.gov/_res/rss/TWs.xml';
-const alertsURL = 'https://travel.state.gov/_res/rss/TAs.xml';
 
 app.intent('GetCountryStatus', {
   slots: {
@@ -43,45 +20,45 @@ app.intent('GetCountryStatus', {
   },
   utterances: [
     'is it safe in {-|country}',
-  ]
+  ],
 }, (request, response) => {
-
   const phrase = request.slot('country');
 
-  fetch(warningsURL)
+  return fetch(warningsURL)
     .then(res => res.text())
-    .then(data => JSON.parse(parser.toJson(data)))
-    .then(dataObj => {
+    .then(data => parseString(data, (err, result) => {
+      if (err) {
+        throw err;
+      }
+      const { description } = result.rss.channel[0];
+      const advisories = result.rss.channel[0].item;
 
-      const {description} = dataObj.rss.channel;
-      const advisories = dataObj.rss.channel.item;
-
-      let countryStatus = {
-        type: description,
+      const countryStatus = {
+        type: description[0],
         country: null,
         issuedAt: null,
         advisory: null,
       };
 
-      advisories.map(item => {
-        const country = item.title.replace(/ Travel Alert */g, "").replace(/ Travel Warning */g, "").toLowerCase();
+      advisories.forEach((item) => {
+        const country = item.title[0].replace(/ Travel Alert */g, '').replace(/ Travel Warning */g, '').toLowerCase();
         const setPhrase = phrase.toLowerCase();
         if (country === setPhrase) {
           countryStatus.country = country;
-          countryStatus.issuedAt = item.pubDate;
-          countryStatus.advisory = item.description;
+          countryStatus.issuedAt = item.pubDate[0];
+          countryStatus.advisory = item.description[0];
         }
       });
 
-      return countryStatus;
-    })
-    .then(statusObj => {
-      if (statusObj.country) {
-        response.say(`There is currently a travel warning in effect for ${statusObj.country}. ${statusObj.type} This travel warning was issued at ${statusObj.issuedAt}. ${statusObj.advisory}.`);
+      if (countryStatus.country) {
+        response.say(`There is currently a travel warning in effect for ${countryStatus.country}. ${countryStatus.type} This travel warning was issued at ${countryStatus.issuedAt}. ${countryStatus.advisory}. For the most accurate and up to date travel advisories, please visit the U.S. State Department's web site at www.state.gov or by calling the State Department directly at (202) 647-6575.`);
       } else {
-        response.say(`I couldn\'t find a current travel warning for ${phrase} at the moment.`);
+        response.say(`I don't see a current travel warning for ${phrase}, however, for the most accurate and up to date travel advisories, please visit the U.S. State Department's web site at www.state.gov or by calling the State Department directly at (202) 647-6575.`);
       }
-    })
+    }))
+    .catch((err) => {
+      response.say('Sorry, but there was the following error:', err);
+    });
 });
 
 exports.handler = app.lambda();
