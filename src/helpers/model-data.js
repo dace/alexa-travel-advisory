@@ -1,12 +1,11 @@
 const parser = require('xml2json');
 
 const modelData = (dataObj) => {
-
   const notices = {
     warnings: {},
     alerts: {},
   };
-
+  
   dataObj.forEach((item) => {
     const advisory = JSON.parse(parser.toJson(item)).rss.channel;
     const type = advisory.title.toLowerCase().includes('warning') ? 'warnings' : 'alerts';
@@ -27,6 +26,4 @@ const modelData = (dataObj) => {
   return notices;
 };
 
-module.exports = {
-  modelData,
-};
+module.exports = { modelData };
