@@ -5,18 +5,21 @@ const modelData = (dataObj) => {
     warnings: {},
     alerts: {},
   };
-  
+
   dataObj.forEach((item) => {
     const advisory = JSON.parse(parser.toJson(item)).rss.channel;
     const type = advisory.title.toLowerCase().includes('warning') ? 'warnings' : 'alerts';
     notices[type].title = `travel ${type}`;
-    notices[type].description = advisory.description;
+    notices[type].description = advisory.description.toLowerCase();
     notices[type].list = [];
     advisory.item.forEach((detail) => {
       notices[type].list.push({
-        title: detail.title,
-        issuedAt: detail.pubDate,
+        country: detail.title.toLowerCase()
+                 .replace(/ travel (warning|alert)/g, ''),
+        issuedAt: detail.pubDate.replace(/EST/, 'Eastern Standard Time')
+                  .toLowerCase(),
         description: detail.description
+                      .toLowerCase()
                       .replace(/\\n/g, ' ')
                       .replace(/\<.*?\>\s?/g, ' ')
                       .replace(/\&.*?\;\s?/g, ' '),
