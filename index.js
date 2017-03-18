@@ -124,7 +124,7 @@ app.intent('GetCountryStatus', {
     });
 });
 
-//  Find number of total warnings
+//  Find number of total warnings and alerts
 
 app.intent('GetCount', {
   utterances: [
@@ -143,7 +143,13 @@ app.intent('GetCount', {
   ])
     .then(res => modelData(res))
     .then((res) => {
-      response.say(`The U.S. State Department currently has ${res.warnings.list.length} issued warnings and ${res.alerts.list.length} issued alerts.`);
+      const warningPlaces = [];
+      const alertPlaces = [];
+
+      res.alerts.list.forEach(item => alertPlaces.push(item.country));
+      res.warnings.list.forEach(item => warningPlaces.push(item.country));
+
+      response.say(`The U.S. State Department currently has ${res.alerts.list.length} issued travel alerts and ${res.warnings.list.length} issued travel warnings. Travel alerts have been issued for the following reasons: ${alertPlaces.join(', ')}. Travel warnings have been issued for the following countries: ${warningPlaces.joing(', ')}`);
     })
     .catch((error) => {
       response.say(`I'm sorry, but I'm having a little trouble with your request. It seems that there is the following error: ${error}.`);
