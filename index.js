@@ -62,7 +62,7 @@ app.intent('GetAlertAndWarningDefinition', {
     getData(warningsURL),
     getData(alertsURL),
   ])
-    .then((res) => modelData(res))
+    .then(res => modelData(res))
     .then((res) => {
       response.say(`${res.warnings.description}. meanwhile, ${res.alerts.description}.`);
     })
