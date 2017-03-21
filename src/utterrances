@@ -1,0 +1,16 @@
+GetCountryStatus is it safe in {country}
+GetCountryStatus should I visit {country}
+GetCountryStatus is it ok to visit {country}
+GetCountryStatus is it dangerous in {country}
+GetCountryStatus what is going on in {country}
+GetCountryStatus how are things in {country}
+GetCountryStatus what is the status of {country}
+GetCountryStatus is there any reason to not visit {country}
+GetCountryStatus does {country} have any warnings or alerts
+GetWarningDefinition what is a travel warning
+GetAlertDefinition what is a travel alert
+GetAlertAndWarningDefinition what's the difference between a warning and an alert
+GetCount how many alerts are there
+GetCount how many alerts are issued
+GetCount how many warnings are there
+GetCount how many warnings are issued
