@@ -4,7 +4,7 @@
 
 # Questions you can ask
 
-This skill allows for the following questions:
+This skill allows for the following type of questions:
 
 ### Definitions
 - "What is a travel warning?"
