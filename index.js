@@ -22,7 +22,7 @@ app.intent('GetWarningDefinition', {
     'what is a travel warning',
   ],
 }, (request, response) => {
-  Promise.all([getData(endpoint.warningsURL)])
+  return Promise.all([getData(endpoint.warningsURL)])
     .then(res => modelData(res))
     .then((res) => {
       response.say(`${res.warnings.description}`);
@@ -39,7 +39,7 @@ app.intent('GetAlertDefinition', {
     'what is a travel alert',
   ],
 }, (request, response) => {
-  Promise.all([getData(endpoint.alertsURL)])
+  return Promise.all([getData(endpoint.alertsURL)])
     .then(res => modelData(res))
     .then((res) => {
       response.say(`${res.alerts.description}`);
@@ -53,10 +53,10 @@ app.intent('GetAlertDefinition', {
 
 app.intent('GetAlertAndWarningDefinition', {
   utterances: [
-    'what\'s the difference between a warning and an alert',
+    'what is the difference between a warning and an alert',
   ],
 }, (request, response) => {
-  Promise.all([
+  return Promise.all([
     getData(endpoint.warningsURL),
     getData(endpoint.alertsURL),
   ])
@@ -78,14 +78,16 @@ app.intent('GetCountryStatus', {
     'should I visit {-|country}',
     'is it ok to visit {-|country}',
     'is it dangerous in {-|country}',
-    'what\'s going on in {-|country}',
-    'is there any reason to now visit {-|country}',
+    'how are things in {-|country}',
+    'what is the status of {-|country}',
+    'what is going on in {-|country}',
+    'is there any reason to not visit {-|country}',
     'does {-|country} have any warnings or alerts',
   ],
 }, (request, response) => {
   const phrase = request.slot('country').toLowerCase();
 
-  Promise.all([
+  return Promise.all([
     getData(endpoint.warningsURL),
     getData(endpoint.alertsURL),
   ])
@@ -126,16 +128,13 @@ app.intent('GetCountryStatus', {
 
 app.intent('GetCount', {
   utterances: [
-    'how many',
-    'how many current',
     'how many alerts are there',
     'how many alerts are issued',
     'how many warnings are there',
     'how many warnings are issued',
-    'what is the number of',
   ],
 }, (request, response) => {
-  Promise.all([
+  return Promise.all([
     getData(endpoint.warningsURL),
     getData(endpoint.alertsURL),
   ])
