@@ -12,7 +12,7 @@ const app = new alexa.app('passport');
 //  Launch welcome
 
 app.launch((request, response) => {
-  response.say('Welcome to Passport, where you can get info on current travel warnings and alerts issued by the U.S. State Department. Please, ask away...');
+  response.say('Welcome to Passport, an unofficial skill, where you can get ask about info on current travel warnings and alerts issued by the U.S. State Department. For the most accurate and up to date travel advisories, or in the case of an emergency, please contact the U.S. State Department by visiting their web site at www.state.gov or by calling the State Department directly at (202) 647-6575.');
 });
 
 // //  Get definition for travel warning
@@ -146,7 +146,7 @@ app.intent('GetCount', {
       res.alerts.list.forEach(item => alertPlaces.push(item.country));
       res.warnings.list.forEach(item => warningPlaces.push(item.country));
 
-      response.say(`The U.S. State Department currently has ${res.alerts.list.length} issued travel alerts and ${res.warnings.list.length} issued travel warnings. Travel alerts have been issued for the following reasons: ${alertPlaces.join(', ')}. Travel warnings have been issued for the following countries: ${warningPlaces.join(', ')}`);
+      response.say(`The U.S. State Department currently has ${res.alerts.list.length} issued travel alerts and ${res.warnings.list.length} issued travel warnings. Travel alerts have been issued for the following reasons: ${alertPlaces.join(', ')}. Travel warnings have been issued for the following ${res.warnings.list.length} countries: ${warningPlaces.join(', ')}`);
     })
     .catch((error) => {
       response.say(`I'm sorry, but I'm having a little trouble with your request. It seems that there is the following error: ${error}.`);
