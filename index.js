@@ -12,7 +12,7 @@ const app = new alexa.app('passport');
 //  Launch welcome
 
 app.launch((request, response) => {
-  response.say('Welcome to Passport, an unofficial skill, where you can get ask about info on current travel warnings and alerts issued by the U.S. State Department. For the most accurate and up to date travel advisories, or in the case of an emergency, please contact the U.S. State Department by visiting their web site at www.state.gov or by calling the State Department directly at (202) 647-6575.');
+  response.say('Welcome to Passport, an unofficial skill, where you can get ask about info on current travel warnings and alerts issued by the U.S. State Department. You can ask things like: "Is it safe in Syria?" or "What is the status of Sudan?". You can even get information explaining the different advisories, by asking things like, "What is the difference between a warning and an alert?". Go ahead, ask away.');
 });
 
 // //  Get definition for travel warning
