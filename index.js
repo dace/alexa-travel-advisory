@@ -88,6 +88,10 @@ app.intent('GetCountryStatus', {
 }, (request, response) => {
   const phrase = request.slot('country').toLowerCase();
 
+  if (!phrase) {
+    return response.say(`Sorry, I didn't get that. You can ask me things like, "Is it safe in Syria?" or "What is the status of Sudan?". Please, ask again.`);
+  }
+
   return Promise.all([
     getData(endpoint.warningsURL),
     getData(endpoint.alertsURL),
