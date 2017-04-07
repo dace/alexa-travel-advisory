@@ -12,7 +12,7 @@ const app = new alexa.app('passport');
 //  Launch welcome
 
 app.launch((request, response) => {
-  response.say('Welcome to Passport, an unofficial skill, where you can get ask about info on current travel warnings and alerts issued by the U.S. State Department. You can ask things like: "Is it safe in Syria?" or "What is the status of Sudan?". You can even get information explaining the different advisories, by asking things like, "What is the difference between a warning and an alert?". Go ahead, ask away.');
+  response.say('Welcome to Passport, an unofficial skill, where you can get ask about info on current travel warnings and alerts issued by the U.S. State Department. You can ask things like: "Is it safe in Syria?" or "What is the status of Sudan?". You can even get information explaining the different types of advisories, by asking things like, "What is the difference between a warning and an alert?". Go ahead, ask away.');
 });
 
 // //  Get definition for travel warning
@@ -120,7 +120,7 @@ app.intent('GetCountryStatus', {
       }
     })
     .catch((error) => {
-      response.say(`I'm sorry, but I'm having a little trouble with your request. It seems that there is the following error: ${error}.`);
+      response.say(`I'm sorry, but I'm having a little trouble with your request. You can ask things like: "Is it safe in Syria?" or "What is the status of Sudan?". You can even get information explaining the different types of advisories, by asking things like, "What is the difference between a warning and an alert?". Go ahead, ask away.'`);
     });
 });
 
