@@ -89,7 +89,8 @@ app.intent('GetCountryStatus', {
   const phrase = request.slot('country').toLowerCase();
 
   if (!phrase) {
-    return response.say(`Sorry, I didn't get that. You can ask me things like, "Is it safe in Syria?" or "What is the status of Sudan?". Please, ask again.`);
+    response.say(`Sorry, I didn't get that. You can ask me things like, "Is it safe in Syria?" or "What is the status of Sudan?". Please, ask again.`);
+    response.shouldEndSession(false);
   }
 
   return Promise.all([
