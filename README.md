@@ -13,5 +13,7 @@ Travel Advisory is an Amazon Alexa skill built on top of NodeJS. It uses [XML fe
 Below are video examples demonstrating the skill. 
 
 [Video 1: Difference between a warning and an alert (0:59)](https://vimeo.com/220098425)
+
 [Video 2: Country without an advisory (0:30)](https://vimeo.com/220097793)
+
 Video 3: Country with a current advisory (coming soon)
