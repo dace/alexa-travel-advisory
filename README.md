@@ -16,4 +16,4 @@ Below are video examples demonstrating the skill.
 
 [Video 2: Country without an advisory (0:30)](https://vimeo.com/220097793)
 
-Video 3: Country with a current advisory (coming soon)
+[Video 3: Country with a current advisory (6:15)](https://vimeo.com/220102712)
