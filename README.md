@@ -2,6 +2,8 @@
 
 ![Amazon Alexa logo](./docs/amazon_alexa_logo.jpg)
 
+[You can read more in-depth details about this project here.](https://medium.com/@hidace/programmatically-designing-a-voice-user-interface-vui-with-amazons-alexa-and-nodejs-5f36a1e5bbfe)
+
 Travel Advisory is an Amazon Alexa skill built on top of NodeJS. It uses [XML feeds from the U.S. State Department](https://www.state.gov/developer/) to provide up to date international travel warnings and alerts.
 
 **NOTE**: This skill currently pulls from the State Department's XML feeds directly. Working on de-coupling data fetching from core functionality by creating a separate NodeJS server that pulls, normalizes and provides a cleaner API that the skill can interact with. Source code for this project will be found [here](https://github.com/hidace/alexa-travel-advisory-api).
