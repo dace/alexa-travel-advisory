@@ -1,6 +1,6 @@
 # Travel Advisory
 
-![Amazon Alexa logo](./docs/amazon_alexa_logo.jpg)
+![Amazon Alexa and NodeJS logo](./docs/alexa_node_logo.jpg)
 
 [You can read more in-depth details about this project here.](https://medium.com/@hidace/programmatically-designing-a-voice-user-interface-vui-with-amazons-alexa-and-nodejs-5f36a1e5bbfe)
 
