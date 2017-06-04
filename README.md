@@ -2,7 +2,7 @@
 
 ![Amazon Alexa logo](./docs/amazon_alexa_logo.jpg)
 
-*You can read more in-depth details about this project [here].*(https://medium.com/@hidace/programmatically-designing-a-voice-user-interface-vui-with-amazons-alexa-and-nodejs-5f36a1e5bbfe)
+[You can read more in-depth details about this project here.](https://medium.com/@hidace/programmatically-designing-a-voice-user-interface-vui-with-amazons-alexa-and-nodejs-5f36a1e5bbfe)
 
 [Travel Advisory](https://medium.com/@hidace/programmatically-designing-a-voice-user-interface-vui-with-amazons-alexa-and-nodejs-5f36a1e5bbfe) is an Amazon Alexa skill built on top of NodeJS. It uses [XML feeds from the U.S. State Department](https://www.state.gov/developer/) to provide up to date international travel warnings and alerts.
 
